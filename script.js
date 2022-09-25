@@ -1,3 +1,14 @@
+const numButton = document.querySelectorAll(".num");
+const equals = document.querySelector(".equals");
+let currentDisplay = document.querySelector('.current-display');
+let oldDisplay = document.querySelector('.old-display');
+let opButtons = document.querySelectorAll('.operator') ;
+let resultDisplay = document.querySelector(".result")
+let numOne = '';
+let numTwo = '';
+let result = ''
+let operator;  
+
 function add(num1, num2) {
     return num1 + num2;
 }
@@ -14,8 +25,8 @@ function divide(num1, num2) {
     return num1 / num2;
 }
 
-function operator(op, num1, num2) {
-    switch (op) {
+function operate(operator, num1, num2) {
+    switch (operator) {
         case '+':
             return add(num1, num2);
             break;
@@ -30,3 +41,43 @@ function operator(op, num1, num2) {
             break
     }
 }
+
+
+
+numButton.forEach((el) => {
+    el.addEventListener('click', (e) => {
+       if (!operator) {
+            numOne += e.target.innerText;
+            numOne = parseInt(numOne);
+            currentDisplay.innerText = numOne;
+        } else {
+            numTwo += e.target.innerText;
+            numTwo = parseInt(numTwo);
+            oldDisplay.innerText = numTwo;
+            currentDisplay.classList.add("opaque");
+        }
+    //    } else {
+            // numTwo = e.target.innerText;
+            // display.append(numTwo);
+            // console.log(numTwo)
+     //   }
+    })
+})
+
+opButtons.forEach((el) => {
+    el.addEventListener("click", (e) => {
+        operator = e.target.innerText;
+    })
+})
+
+equals.addEventListener("click", () => {
+    result = operate(operator, numOne, numTwo);
+    result = parseInt(result);
+    resultDisplay.innerText = result;
+    currentDisplay.classList.add('hidden');
+    oldDisplay.classList.add('hidden');
+})
+
+// equals.addEventListener("click", () => {
+//     operate()
+// })
