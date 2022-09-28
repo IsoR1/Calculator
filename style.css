@@ -61,9 +61,6 @@ li {
     opacity: 0.5;
 }
 
-.old-display {
-
-}
 
 .displays {
     display: flex;
@@ -74,4 +71,9 @@ li {
 
 .hidden {
     display: none;
+}
+
+.all-clear {
+    display: grid;
+    grid-column: 1 / 3;
 }
